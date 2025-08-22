@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Semangat BYTNA!!!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(255,105,180,0.6);
+      animation: fadeIn 2s ease forwards;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #fff;
+      margin-top: 15px;
+      width: 75%;
+      text-align: center;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 2s;
+    }
+
+    img.friend {
+      width: 230px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 10px 25px rgba(255,105,180,0.4);
+      margin-bottom: 20px;
+      transform: scale(0);
+      animation: zoomIn 1.5s ease forwards;
+    }
+
+    /* Logo */
+    img.logo {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Animations */
+    @keyframes zoomIn { to { transform: scale(1); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* Falling animations */
+    .falling {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      opacity: 0.9;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 1;
+      }
+    }
+
+    /* Klik animasi logo */
+    .clicked {
+      animation: clickEffect 0.6s ease;
+    }
+
+    @keyframes clickEffect {
+      0% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.2) rotate(15deg); }
+      50% { transform: scale(0.9) rotate(-15deg); }
+      75% { transform: scale(1.1) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* Teks motivasi tambahan */
+    .message {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 105, 180, 0.8);
+      padding: 12px 20px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 1.1em;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      opacity: 0;
+      pointer-events: none;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translate(-50%, 20px); }
+      100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Foto teman -->
+  <img src="foto.jpg.jpeg" alt="Foto Teman" class="friend">
+
+  <!-- Kata-kata penyemangat -->
+  <h1>ALLOW MANITH ❤︎ </h1>
+  <p>
+    semangat belajar main valorantnya yaw ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧ <br>
+    jangan jago main valorant dulu plisss soalnya KOCAK liat kamu main planga plongo ｡°(°¯᷄◠¯᷅°)°｡
+    apapun mapnya always pick SAGE ya!! AWKAOKWOAKW 
+    -dari anne yang imot nan lucu (˶˃ ᵕ ˂˶)
+  </p>
+
+  <!-- Logo di pojok kanan atas -->
+  <img src="logo klik.png" alt="Logo" class="logo" id="logo">
+   </body><h1>bye imoett jangan salting gitu dong aw 
+    jangan lupa klik logo pojok kanan Y
+   </h1>
+
+  <!-- Musik latar -->
+  <audio id="bg-music" src="sunny day.mp3" autoplay loop></audio>
+
+  <script>
+    // Animasi jatuh (love & bunga)
+    function createFalling(symbol) {
+      const el = document.createElement("div");
+      el.classList.add("falling");
+      el.innerText = symbol;
+      document.body.appendChild(el);
+
+      el.style.left = Math.random() * window.innerWidth + "px";
+      el.style.fontSize = (Math.random() * 20 + 25) + "px";
+      el.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+      setTimeout(() => { el.remove(); }, 6000);
+    }
+
+    setInterval(() => createFalling("💖"), 1000);
+    setInterval(() => createFalling("🌸"), 1500);
+
+    // Musik aktif setelah klik
+    const audio = document.getElementById("bg-music");
+    document.body.addEventListener("click", () => {
+      if (audio.paused) audio.play();
+    });
+
+    // Efek klik logo + teks motivasi
+    const logo = document.getElementById("logo");
+    const messages = [
+      "KALO LAGI PEEK MUSUH JANGAN NGELAMUN",
+      "KALO NEMBAK GAUSAH PANIK WOI",
+      "CRUSORNYA JANGAN DIKEBAWAHIN JUGA KOCAK",
+      "BISA INI JADI PRO PLAYER",
+      "PALO YUKKKKKKKKKKKKK"
+    ];
+
+    logo.addEventListener("click", () => {
+      // Efek klik logo
+      logo.classList.add("clicked");
+      setTimeout(() => logo.classList.remove("clicked"), 600);
+
+      // Buat teks motivasi baru
+      const msg = document.createElement("div");
+      msg.classList.add("message");
+      msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+      document.body.appendChild(msg);
+
+      // Hapus setelah beberapa detik
+      setTimeout(() => { msg.remove(); }, 3000);
+    });
+  </script>
+</body>
+</html>
